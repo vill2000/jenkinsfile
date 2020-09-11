@@ -1,23 +1,24 @@
-Scripted pipelinenode
+#Scripted pipeline
+node
 {
-stage "1. Install docker package"
-sh "yum install docker -y"
+ stage "1. Install docker package"
+ sh "yum install docker -y"
 
-stage "2. Start the docker service"
-sh "service docker start"
+ stage "2. Start the docker service"
+ sh "service docker start"
 
-stage "3. Build the image."
-sh "docker build -t scripted-pipeline-image /home/ec2-user"
+ stage "3. Build the image."
+ sh "docker build -t scripted-pipeline-feature /home/ec2-user"
 
-stage "4. Run the container"
-sh "docker run -dit -p 9090:80 --name scripted-pipeline-container scripted-pipeline-image"
+ stage "4. Run the container"
+ sh "docker run -dit -p 9090:80 --name scripted-pipeline-container-feature scripted-pipeline-feature"
 
-stage "5. Tag the container"
-sh "docker tag scripted-pipeline-image dgruploads/scripted-pipeline-image"
+ stage "5. Tag the container"
+ sh "docker tag scripted-pipeline-feature vill2000/scripted-pipeline-feature"
 
-stage "6. Loginto the docker hub"
-sh" docker login -u dgruploads -p 9886360651Dd"
+ stage "6. Loginto the docker hub"
+ sh" docker login -u vill2000 -p Anniedaniel24"
 
-stage "7. Push the image to dockerhub"
-sh "docker push dgruploads/scripted-pipeline-image"
+ stage "7. Push the image to dockerhub"
+ sh "docker push dgruploads/scripted-pipeline-feature"
 }
