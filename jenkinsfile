@@ -1,4 +1,5 @@
 Scripted pipelinenode
+node
 {
 stage "1. Install docker package"
 sh "yum install docker -y"
